@@ -32,6 +32,10 @@ class PrintNodeServiceProvider extends ServiceProvider
         $this->app->singleton('printnode', function ($app) {
             return new PrintNode;
         });
+
+        $this->app->singleton('printjob', function ($app) {
+            return new PrintJob;
+        });
     }
 
     /**
@@ -41,7 +45,7 @@ class PrintNodeServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['printnode'];
+        return ['printnode', 'printjob'];
     }
     
     /**

@@ -37,4 +37,9 @@ class PrintNode
     {
         return $this->client->viewPrintJobs($offset, $limit, $printJobSet, $printerSet);
     }
+
+    public function createPrintJob($printJob)
+    {
+        return $this->client->createPrintJob($printJob);
+    }
 }
