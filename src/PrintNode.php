@@ -14,7 +14,7 @@ class PrintNode
 
     public function __construct()
     {
-        $credentials = new ApiKey(config('printnode.apikey'));
+        $credentials = new ApiKey(config('printnode.auth.apikey'));
         $this->client = new Client($credentials);
     }
 
@@ -25,17 +25,17 @@ class PrintNode
 
     public function getComputers($offset = 0, $limit = 500, $computerSet = null)
     {
-        return $this->client->viewComputers($offset, $limit, $computerSet);
+        return collect($this->client->viewComputers($offset, $limit, $computerSet));
     }
 
     public function getPrinters($offset = 0, $limit = 500, $printerSet = null, $computerSet = null)
     {
-        return $this->client->viewPrinters($offset, $limit, $printerSet, $computerSet);
+        return collect($this->client->viewPrinters($offset, $limit, $printerSet, $computerSet));
     }
 
     public function getPrintJobs($offset = 0, $limit = 500, $printJobSet = null, $printerSet = null)
     {
-        return $this->client->viewPrintJobs($offset, $limit, $printJobSet, $printerSet);
+        return collect($this->client->viewPrintJobs($offset, $limit, $printJobSet, $printerSet));
     }
 
     public function createPrintJob($printJob)

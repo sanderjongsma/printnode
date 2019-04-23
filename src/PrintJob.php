@@ -14,16 +14,12 @@ class PrintJob
 
     public function __construct()
     {
-        $credentials = new ApiKey(config('printnode.apikey'));
+        $credentials = new ApiKey(config('printnode.auth.apikey'));
         $this->client = new Client($credentials);
     }
 
     public function create($attributes = [])
     {
-        if (empty($attributes)) {
-            $attributes = config('printnode.attributes');
-        }
-
         $printJob = new \PrintNode\Entity\PrintJob($this->client);
         $this->setAttributes($printJob, $attributes);
 
@@ -32,6 +28,7 @@ class PrintJob
 
     public function setAttributes($printJob, $attributes)
     {
+        $attributes = $attributes + config('printnode.attributes');
         foreach ($attributes as $attributeKey => $attributeValue) {
             $printJob->$attributeKey = $attributeValue;
         }
