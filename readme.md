@@ -1,57 +1,50 @@
-# PrintNode
+# Laravel 5 PrintNode Api Wrapper
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
+A simple Laravel 5 wrapper for the [official PrintNode PHP Library](https://github.com/PrintNode/PrintNode-PHP).
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
+## Version overview
+
+Uses the 2.0.0-rc1 version from the printnode php package
 
 ## Installation
 
-Via Composer
+### Step 1: Install Through Composer
 
 ``` bash
-$ composer require sanderjongsma/printnode
+composer require sanderjongsma/printnode
 ```
 
-## Usage
+### Step 2: Add the Service Provider
+Add the service provider in `app/config/app.php`
+```php
+'provider' => [
+    ...
+    SanderJongsma\PrintNode\PrintNodeServiceProvider::class,
+    ...
+];
+```
 
-## Change log
+### Step 3: Add the Facades
+Add the alias in `app/config/app.php`
+```php
+'aliases' => [
+    ...
+    'PrintNode' => SanderJongsma\PrintNode\Facades\PrintNode::class,
+    'PrintJob' => SanderJongsma\PrintNode\Facades\PrintJob::class,
+    ...
+];
+```
 
-Please see the [changelog](changelog.md) for more information on what has changed recently.
-
-## Testing
-
+### Step 4: Publish configuration
 ``` bash
-$ composer test
+php artisan vendor:publish --provider="SanderJongsma\PrintNode\PrintNodeServiceProvider"
 ```
 
-## Contributing
-
-Please see [contributing.md](contributing.md) for details and a todolist.
-
-## Security
-
-If you discover any security related issues, please email author email instead of using the issue tracker.
-
-## Credits
-
-- [author name][link-...Add your license text here...author]
-- [All Contributors][link-contributors]
+### Step 5: Customize configuration
+You can directly edit the configuration in `config/printnode.php` or copy these values to your `.env` file.
+```php
+PRINTNODE_API_KEY=yourapikey
+```
 
 ## License
-
-license. Please see the [license file](license.md) for more information.
-
-[ico-version]: https://img.shields.io/packagist/v/sanderjongsma/printnode.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/sanderjongsma/printnode.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/sanderjongsma/printnode/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
-
-[link-packagist]: https://packagist.org/packages/sanderjongsma/printnode
-[link-downloads]: https://packagist.org/packages/sanderjongsma/printnode
-[link-travis]: https://travis-ci.org/sanderjongsma/printnode
-[link-styleci]: https://styleci.io/repos/12345678
-[link-author]: https://github.com/sanderjongsma
-[link-contributors]: ../../contributors
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
